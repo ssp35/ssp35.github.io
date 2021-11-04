@@ -1,0 +1,14 @@
+name: "Personal Website"
+output_dir: "."
+navbar:
+  title: "Home"
+  right:
+    - icon: fa-envelope fa-lg
+      href: mailto:<sp4029@cumc.columbia.edu>
+    - icon: fab fa-linkedin
+      href: https://www.linkedin.com/in/saryu-patel-a302a3173/
+    - icon: fa-github fa-lg
+      href: http://github.com/ssp35/
+output:
+  html_document:
+    theme: darkly

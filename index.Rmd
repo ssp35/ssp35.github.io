@@ -1,0 +1,30 @@
+---
+title: "Saryu's Personal Website"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+## About Me
+
+I am a first year MS in Biostatistics student at Mailman. I graduated in May from the University of Pittsburgh, where I double-majored in Mathematical Biology and Statistics.
+
+### Resume
+
+[Click here](resume.html) to learn more about my academic and professional experience.
+
+## Fun Facts
+
+* I am fostering kittens! This is Caleb:
+
+<image src="images/caleb.jpg" style="width:50%">
+
+* And this is Clara:
+
+<image src="images/clara.jpg" style="width:60%">
+
+* I also enjoy creating art in my free time:
+
+<image src="images/art.PNG" style="width:50%">
+
