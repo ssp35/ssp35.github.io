@@ -10,7 +10,7 @@ navbar:
     - icon: fab fa-linkedin
       href: https://www.linkedin.com/in/saryu-patel-a302a3173/
     - icon: fa-github fa-lg
-      href: http://github.com/ssp35/
+      href: https://github.com/ssp35/ssp35.github.io
 output:
   html_document:
     theme: darkly
