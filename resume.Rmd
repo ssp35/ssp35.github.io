@@ -5,3 +5,77 @@ output:
     toc: true
     toc_float: true
 ---
+
+## Academics
+
+### Education
+
+* Columbia University, Sept 2021-Present
+  - Master of Science in Biostatistics
+* University of Pittsburgh, Aug 2017-May 2021
+  - Bachelor of Science in Mathematical Biology
+  - Bachelor of Science in Statistics
+
+### Relevant Coursework
+
+* Data Science
+* Applied Regression 
+* Applied Experimental Design 
+* Time Series 
+* Python
+* Biostatistics
+* Computational Biology 
+* Mathematical Biology
+
+## Professional
+
+### Work Experience
+
+* Columbia University Research, *Research Assistant*, June 2021-Present
+  - Construct and study networks of Covid-19 patients in NYC hospitals
+* University of Pittsburgh Research, *Research Assitant*, Feb 2019-May 2021
+  - Used R to visualize and model Covid-19 data
+  - Used Python to analyze graphs and develop a program for use in immunotherapy 
+  - Troubleshooted issues with the program’s translation of protein interactions 
+* Statistics Lab, *Student Worker*, Sept 2019-April 2021
+  - Aided students with homework and Minitab for introductory statistics courses
+  - Assisted recitation instructors during recitations for introductory statistics courses
+* Mathnasium, *Instructor*, Feb 2017-July 2020
+  - Instructed up to 16 students a day from grades K-12 in the areas of elementary math through Calculus
+  - Graded student assessments and organized student work materials
+* Statistics Consulting Internship, *Intern*, Jan 2019-April 2019
+  - Assisted clients conducting research with experimental design and data analysis
+  - Conducted presentations regarding client research 
+
+### Additional Skills
+
+* Python
+* R
+* SAS
+* Unix
+* Minitab
+* MATLAB
+* LaTeX
+* SQL
+* Tableau
+* Data visualization
+* Machine learning
+* Microsoft Office
+
+## Extra Curriculars
+
+* Origins, *Finance and Sponsorship Chair*, July 2021-Present
+  - Apply to grants for funding and reach out to potential sponsors
+  - Keep track of income and expenses
+
+* Steel City Sapna, *Hospitality Chair*, May 2020-May 2021
+  - Maintained a hospitable environment for teams visiting Pittsburgh for this competition
+  - Responsible for ordering food for the teams throughout the weekend of their stay
+
+* Dhirana, *Ticketing Assistant Chair*, Sept 2018-May 2021
+  - Organized and kept track of ticket sales for various fundraising events
+  - Contacted businesses for donations 
+
+* Nrityamala, *Fundraising Business Manager*, Sept 2017-May 2021
+  - Organized events to raise funds throughout the year
+  - Kept track of fundraising income and competition expenses
