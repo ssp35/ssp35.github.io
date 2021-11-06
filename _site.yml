@@ -3,6 +3,8 @@ output_dir: "."
 navbar:
   title: "Home"
   right:
+    - text: Dashboard
+      href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<sp4029@cumc.columbia.edu>
     - icon: fab fa-linkedin

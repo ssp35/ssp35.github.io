@@ -1,0 +1,63 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+data("instacart")
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+instacart %>% 
+  filter(department == "bakery",
+         aisle == "bakery desserts",
+         str_detect(product_name, "Apple")) %>% 
+  mutate(product_name = forcats::fct_reorder(product_name, order_hour_of_day)) %>% 
+  plot_ly(x = ~product_name, y = ~order_hour_of_day, type = "box",
+          color = ~product_name, colors = "viridis") %>% 
+  layout(title = "Hour of Day Apple Desserts Are Ordered",
+         xaxis = list(title = "Product Name"),
+         yaxis = list(title = "Hour of Day"))
+```
+
+Column {.tabset, data-width=500}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+instacart %>% 
+  group_by(product_name) %>% 
+  summarize(n_obs = n()) %>% 
+  filter(n_obs > 5000) %>% 
+  mutate(product_name = forcats::fct_reorder(product_name, desc(n_obs))) %>% 
+  plot_ly(x = ~product_name, y = ~n_obs, type = "bar", 
+          color = ~product_name, colors = "viridis") %>% 
+  layout(title = "Most Popular Products",
+         xaxis = list(title = "Product Name"),
+         yaxis = list(title = "Number Ordered"))
+```
+
+### Chart C
+
+```{r}
+instacart %>% 
+  filter(product_name == "Mint Chip") %>% 
+  plot_ly(x = ~days_since_prior_order, type = "histogram") %>% 
+  layout(title = "Days Since Ordering Mint Chip Ice Cream",
+         xaxis = list(title = "Days Since Prior Order"),
+         yaxis = list(title = "Count"))
+```

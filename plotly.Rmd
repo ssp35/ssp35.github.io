@@ -1,0 +1,56 @@
+---
+title: "Plotly"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r message=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+data("instacart")
+```
+
+## Plot 1
+
+```{r}
+instacart %>% 
+  group_by(product_name) %>% 
+  summarize(n_obs = n()) %>% 
+  filter(n_obs > 5000) %>% 
+  mutate(product_name = forcats::fct_reorder(product_name, desc(n_obs))) %>% 
+  plot_ly(x = ~product_name, y = ~n_obs, type = "bar", 
+          color = ~product_name, colors = "viridis") %>% 
+  layout(title = "Most Popular Products",
+         xaxis = list(title = "Product Name"),
+         yaxis = list(title = "Number Ordered"))
+```
+
+## Plot 2
+
+```{r}
+instacart %>% 
+  filter(department == "bakery",
+         aisle == "bakery desserts",
+         str_detect(product_name, "Apple")) %>% 
+  mutate(product_name = forcats::fct_reorder(product_name, order_hour_of_day)) %>% 
+  plot_ly(x = ~product_name, y = ~order_hour_of_day, type = "box",
+          color = ~product_name, colors = "viridis") %>% 
+  layout(title = "Hour of Day Apple Desserts Are Ordered",
+         xaxis = list(title = "Product Name"),
+         yaxis = list(title = "Hour of Day"))
+```
+
+## Plot 3
+
+```{r}
+instacart %>% 
+  filter(product_name == "Mint Chip") %>% 
+  plot_ly(x = ~days_since_prior_order, type = "histogram") %>% 
+  layout(title = "Days Since Ordering Mint Chip Ice Cream",
+         xaxis = list(title = "Days Since Prior Order"),
+         yaxis = list(title = "Count"))
+```
+

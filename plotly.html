@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Plotly</title>
+
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/darkly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.10.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="dashboard.html">Dashboard</a>
+</li>
+<li>
+  <a href="mailto:&lt;sp4029@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/saryu-patel-a302a3173/">
+    <span class="fab fa-linkedin"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/ssp35/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Plotly</h1>
+
+</div>
+
+
+<pre class="r"><code>library(tidyverse)
+library(p8105.datasets)
+library(plotly)
+data(&quot;instacart&quot;)</code></pre>
+<div id="plot-1" class="section level2">
+<h2>Plot 1</h2>
+<pre class="r"><code>instacart %&gt;% 
+  group_by(product_name) %&gt;% 
+  summarize(n_obs = n()) %&gt;% 
+  filter(n_obs &gt; 5000) %&gt;% 
+  mutate(product_name = forcats::fct_reorder(product_name, desc(n_obs))) %&gt;% 
+  plot_ly(x = ~product_name, y = ~n_obs, type = &quot;bar&quot;, 
+          color = ~product_name, colors = &quot;viridis&quot;) %&gt;% 
+  layout(title = &quot;Most Popular Products&quot;,
+         xaxis = list(title = &quot;Product Name&quot;),
+         yaxis = list(title = &quot;Number Ordered&quot;))</code></pre>
+<div id="htmlwidget-fa948181ce47e7e97205" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fa948181ce47e7e97205">{"x":{"visdat":{"10c971cc232d1":["function () ","plotlyVisDat"]},"cur_data":"10c971cc232d1","attrs":{"10c971cc232d1":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Most Popular Products","xaxis":{"domain":[0,1],"automargin":true,"title":"Product Name","type":"category","categoryorder":"array","categoryarray":["Banana","Bag of Organic Bananas","Organic Strawberries","Organic Baby Spinach","Large Lemon","Organic Avocado","Organic Hass Avocado","Strawberries","Limes","Organic Raspberries"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Number Ordered"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":["Banana"],"y":[18726],"type":"bar","name":"Banana","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Bag of Organic Bananas"],"y":[15480],"type":"bar","name":"Bag of Organic Bananas","marker":{"color":"rgba(72,40,120,1)","line":{"color":"rgba(72,40,120,1)"}},"textfont":{"color":"rgba(72,40,120,1)"},"error_y":{"color":"rgba(72,40,120,1)"},"error_x":{"color":"rgba(72,40,120,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Organic Strawberries"],"y":[10894],"type":"bar","name":"Organic Strawberries","marker":{"color":"rgba(62,74,137,1)","line":{"color":"rgba(62,74,137,1)"}},"textfont":{"color":"rgba(62,74,137,1)"},"error_y":{"color":"rgba(62,74,137,1)"},"error_x":{"color":"rgba(62,74,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Organic Baby Spinach"],"y":[9784],"type":"bar","name":"Organic Baby Spinach","marker":{"color":"rgba(49,104,142,1)","line":{"color":"rgba(49,104,142,1)"}},"textfont":{"color":"rgba(49,104,142,1)"},"error_y":{"color":"rgba(49,104,142,1)"},"error_x":{"color":"rgba(49,104,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Large Lemon"],"y":[8135],"type":"bar","name":"Large Lemon","marker":{"color":"rgba(38,130,142,1)","line":{"color":"rgba(38,130,142,1)"}},"textfont":{"color":"rgba(38,130,142,1)"},"error_y":{"color":"rgba(38,130,142,1)"},"error_x":{"color":"rgba(38,130,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Organic Avocado"],"y":[7409],"type":"bar","name":"Organic Avocado","marker":{"color":"rgba(31,158,137,1)","line":{"color":"rgba(31,158,137,1)"}},"textfont":{"color":"rgba(31,158,137,1)"},"error_y":{"color":"rgba(31,158,137,1)"},"error_x":{"color":"rgba(31,158,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Organic Hass Avocado"],"y":[7293],"type":"bar","name":"Organic Hass Avocado","marker":{"color":"rgba(53,183,121,1)","line":{"color":"rgba(53,183,121,1)"}},"textfont":{"color":"rgba(53,183,121,1)"},"error_y":{"color":"rgba(53,183,121,1)"},"error_x":{"color":"rgba(53,183,121,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Strawberries"],"y":[6494],"type":"bar","name":"Strawberries","marker":{"color":"rgba(109,205,89,1)","line":{"color":"rgba(109,205,89,1)"}},"textfont":{"color":"rgba(109,205,89,1)"},"error_y":{"color":"rgba(109,205,89,1)"},"error_x":{"color":"rgba(109,205,89,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Limes"],"y":[6033],"type":"bar","name":"Limes","marker":{"color":"rgba(180,222,44,1)","line":{"color":"rgba(180,222,44,1)"}},"textfont":{"color":"rgba(180,222,44,1)"},"error_y":{"color":"rgba(180,222,44,1)"},"error_x":{"color":"rgba(180,222,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["Organic Raspberries"],"y":[5546],"type":"bar","name":"Organic Raspberries","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="plot-2" class="section level2">
+<h2>Plot 2</h2>
+<pre class="r"><code>instacart %&gt;% 
+  filter(department == &quot;bakery&quot;,
+         aisle == &quot;bakery desserts&quot;,
+         str_detect(product_name, &quot;Apple&quot;)) %&gt;% 
+  mutate(product_name = forcats::fct_reorder(product_name, order_hour_of_day)) %&gt;% 
+  plot_ly(x = ~product_name, y = ~order_hour_of_day, type = &quot;box&quot;,
+          color = ~product_name, colors = &quot;viridis&quot;) %&gt;% 
+  layout(title = &quot;Hour of Day Apple Desserts Are Ordered&quot;,
+         xaxis = list(title = &quot;Product Name&quot;),
+         yaxis = list(title = &quot;Hour of Day&quot;))</code></pre>
+<div id="htmlwidget-75eae2558a54fa66f771" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-75eae2558a54fa66f771">{"x":{"visdat":{"10c9720d39906":["function () ","plotlyVisDat"]},"cur_data":"10c9720d39906","attrs":{"10c9720d39906":{"x":{},"y":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Hour of Day Apple Desserts Are Ordered","xaxis":{"domain":[0,1],"automargin":true,"title":"Product Name","type":"category","categoryorder":"array","categoryarray":["Apple","Mini Apple Pie Pre Priced $3.99","9\\\" Apple Pie","Apple Turnovers","Apple Pie","Apple Strudel Bites","6\\\" Apple Pie","8\\\" Apple Pie","Wheat & Gluten Free Apple Pie","4\\\" Apple Pie"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Hour of Day"},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"fillcolor":"rgba(68,1,84,0.5)","x":["Apple"],"y":[0],"type":"box","name":"Apple","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(72,40,120,0.5)","x":["Mini Apple Pie Pre Priced $3.99"],"y":[12],"type":"box","name":"Mini Apple Pie Pre Priced $3.99","marker":{"color":"rgba(72,40,120,1)","line":{"color":"rgba(72,40,120,1)"}},"line":{"color":"rgba(72,40,120,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(62,74,137,0.5)","x":["9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie","9\\\" Apple Pie"],"y":[11,8,9,17,14,11,17,15,11,14,15,8],"type":"box","name":"9\\\" Apple Pie","marker":{"color":"rgba(62,74,137,1)","line":{"color":"rgba(62,74,137,1)"}},"line":{"color":"rgba(62,74,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(49,104,142,0.5)","x":["Apple Turnovers","Apple Turnovers","Apple Turnovers","Apple Turnovers","Apple Turnovers","Apple Turnovers","Apple Turnovers"],"y":[16,14,22,13,8,10,10],"type":"box","name":"Apple Turnovers","marker":{"color":"rgba(49,104,142,1)","line":{"color":"rgba(49,104,142,1)"}},"line":{"color":"rgba(49,104,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(38,130,142,0.5)","x":["Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie","Apple Pie"],"y":[13,6,16,15,14,14,13,19,11,12,16,14,14,16,10,9,8,14,13,19,9,13,12,18],"type":"box","name":"Apple Pie","marker":{"color":"rgba(38,130,142,1)","line":{"color":"rgba(38,130,142,1)"}},"line":{"color":"rgba(38,130,142,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(31,158,137,0.5)","x":["Apple Strudel Bites","Apple Strudel Bites","Apple Strudel Bites","Apple Strudel Bites","Apple Strudel Bites","Apple Strudel Bites"],"y":[15,14,13,2,14,17],"type":"box","name":"Apple Strudel Bites","marker":{"color":"rgba(31,158,137,1)","line":{"color":"rgba(31,158,137,1)"}},"line":{"color":"rgba(31,158,137,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(53,183,121,0.5)","x":["6\\\" Apple Pie","6\\\" Apple Pie","6\\\" Apple Pie","6\\\" Apple Pie"],"y":[18,14,15,12],"type":"box","name":"6\\\" Apple Pie","marker":{"color":"rgba(53,183,121,1)","line":{"color":"rgba(53,183,121,1)"}},"line":{"color":"rgba(53,183,121,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(109,205,89,0.5)","x":["8\\\" Apple Pie","8\\\" Apple Pie","8\\\" Apple Pie","8\\\" Apple Pie","8\\\" Apple Pie","8\\\" Apple Pie","8\\\" Apple Pie"],"y":[10,10,18,15,19,19,16],"type":"box","name":"8\\\" Apple Pie","marker":{"color":"rgba(109,205,89,1)","line":{"color":"rgba(109,205,89,1)"}},"line":{"color":"rgba(109,205,89,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(180,222,44,0.5)","x":["Wheat & Gluten Free Apple Pie","Wheat & Gluten Free Apple Pie","Wheat & Gluten Free Apple Pie"],"y":[16,14,16],"type":"box","name":"Wheat & Gluten Free Apple Pie","marker":{"color":"rgba(180,222,44,1)","line":{"color":"rgba(180,222,44,1)"}},"line":{"color":"rgba(180,222,44,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(253,231,37,0.5)","x":["4\\\" Apple Pie"],"y":[19],"type":"box","name":"4\\\" Apple Pie","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="plot-3" class="section level2">
+<h2>Plot 3</h2>
+<pre class="r"><code>instacart %&gt;% 
+  filter(product_name == &quot;Mint Chip&quot;) %&gt;% 
+  plot_ly(x = ~days_since_prior_order, type = &quot;histogram&quot;) %&gt;% 
+  layout(title = &quot;Days Since Ordering Mint Chip Ice Cream&quot;,
+         xaxis = list(title = &quot;Days Since Prior Order&quot;),
+         yaxis = list(title = &quot;Count&quot;))</code></pre>
+<div id="htmlwidget-854ba3c68ae44bb8ecb3" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-854ba3c68ae44bb8ecb3">{"x":{"visdat":{"10c972733cea8":["function () ","plotlyVisDat"]},"cur_data":"10c972733cea8","attrs":{"10c972733cea8":{"x":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"histogram"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Days Since Ordering Mint Chip Ice Cream","xaxis":{"domain":[0,1],"automargin":true,"title":"Days Since Prior Order"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Count"},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[30,1,21,17,6,8,30,5,27,30,13,13,6,0,1,30,7,21,2,29,30,3,30,30,30,10,26,23,30,30,8,4,14,30,30,30,21,20,5,17,30,30,12,14,30,5,1,11,16,21,10,10,11,9,16,22,7,10,18,12,14,30,10,14,30,11,9,7,29,30,30,30,8,9,9,15,11,29,6,30,23,30,9,6,30,1,30,30,12,14,3,30,6,30,30,20,3,11,3,27,5,26,29,17,6,14,26,10,22,30,9,20,30,15,18,24,18,1,30,14,13,20,30,24,30,9,30,17,28,3,30,30,5,17,7,30,6,7,25,30,29,14,21,30,20,30,16,16,30,30,10,30,30,9,27,7,7,30,30,30,19,8,30,30,30,6,28,30,10,21,30,30,12,30,30,7,30,30,14,30,17,30,8,30,28,0,7,12,9,30,30,8,26,8,4,30,10,10,30,1,8,30,7,6,12,8,30,27,19,7,28,30,5,27,30,8,20,20,15,19,15,21,30,6,20,7,14,2,30,14,27,12,28,7,3,22,30,30,30,30,30,14,30,9,30,30,6,8,26,5,9,27,30,13,10,9,30,6,12,7,2,3,17,25,11,30,30,29,30,30,3,7,30,30,9,30,24,14,30,18,15,6,14,5,13,20,18,11,30,4,30,14,30,21,9,23,30,30,30,30,10,30,23,4,21,30,28,5,24,30,28,29,11,30,30,8,6,14,24,9,5,21,23,21,3,8,23,9,16,3,30,5,17,30,30,13,14,7,30,7,8,16,30,29,30,30,3,16,16,12,30,16,5,4,3,15,8,30,1,30,30,30,5,30,14,30,30,30,12],"type":"histogram","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
